@@ -1,11 +1,3 @@
-XCode project build settings:
-    Other Linker Flags: -lpython3.4.1_OSX
-    Library Search Paths: ./Libs
-    
-Also see "test_funcmapper()"
-
-
-
 πCxx 0.0 by π
 20 Jan 2015
 
@@ -44,6 +36,18 @@ What is πcxx?
 
 = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
+Build stuff:
+
+    Dropping the code into an empty Xcode project, I needed to do the following:
+    
+        XCode project build settings:
+            Other Linker Flags: -lpython3.4.1_OSX
+            Library Search Paths: ./Libs
+    
+        Also look in test_funcmapper()
+
+= = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
 QuickStart:
 
     This code contains an XCode project that should work on OSX.
@@ -73,7 +77,7 @@ License:
     Non-commercial: you are free to do whatever you like.
 
     Commercial: you have to donate something you consider appropriate.
-        That's up to you. Cash. Kittens. A punch in the face. Up to you!
+        Cash. Kittens. A punch in the face.  Up to you -- surprise me!  
         At least donate an email saying hello.
         (My paypal is sunfish7@gmail.com)
 
@@ -131,7 +135,7 @@ Motivation for rewriting PyCXX:
      - thoroughly commented
      - zero duplication
      - manages a seamless wrapping of PyObject
-     - maybe 10x fewer LOC
+     - maybe 10x fewer LOC (once you've taken the comments out)
 
 = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
