@@ -1,0 +1,297 @@
+This is what the test should output:
+
+   EXEC: Object{2}
+2
+   
+   EXEC: Object{2}.dump_ascii()
+2
+   -> illustrating caching of low value integers:
+   x = 1 {PyObject 0x100243940, refcount 694
+   x = 2 {PyObject 0x100243960, refcount 111
+   
+-> illustrating refcount when assigning:
+   x = 1000000 {PyObject 0x10036cfb0, refcount 1
+   y = 1000000 {PyObject 0x10036cfb0, refcount 2
+   x = 1000000 {PyObject 0x10036cfb0, refcount 1
+   y = 1000001 {PyObject 0x100544bf0, refcount 1
+   
+   EXEC: Object{ std::string("foo") }
+'foo'
+   
+   EXEC: Object{ "bar" }
+'bar'
+   
+   EXEC: ( Object{ PyBytes_Type, "bar" } )
+b'bar'
+   
+   EXEC: std::string(Object{42})
+42
+   
+   EXEC: static_cast<int>( Object{"42"}.convert_to(PyLong_Type) )
+42
+   
+   EXEC: static_cast<int>( Object{"42"} )
+42
+   
+   EXEC: Object{3.14} + Object{"1"}
+   throw_if_pyerr: PyErr_Occurred [] ... 
+TypeError: unsupported operand type(s) for +: 'float' and 'str'
+Correctly caught Python error, as Python can't handle  3.14 + '1' 
+   
+   EXEC: Object(PyComplex_Type,"3+4j")
+(3+4j)
+   
+   EXEC: 2 * Object(PyComplex_Type,"3+4j")
+(6+8j)
+   
+   EXEC: 2.0 * Object( std::complex<float> (1,2) )
+(2+4j)
+   
+   EXEC: Object( std::complex<double>(1,2) ) * Object(PyComplex_Type,"3+4j")
+(-5+10j)
+   
+   EXEC: std::complex<float> ( Object{"1+2j"} )
+(1,2)
+   
+   EXEC: std::complex<double>( Object{"1+2j"} )
+(1,2)
+   
+   EXEC: Object( 'T', 1, 2.01, "three")
+(1, 2.01, 'three')
+   
+   EXEC: Object( 'L', 1, 2.01, "three")[1]
+2.01
+   
+   EXEC: dict["k2"].str()
+'666'
+   
+   EXEC: Object( 'D', "k1", 1.1, "k2", 666 )["k2"]
+666
+   
+   EXEC: Object('B', "abcde")[3] == int('d') ? "True" : "False"
+True
+   
+   EXEC: { list += Object( 'L', 4,5 ); list; }
+[1, 2, 3, 4, 5]
+   
+   EXEC: { list[1] = 42; for(auto&& i : list) std::cout << i << ", "; "\n" "woot"; }
+1, 42, 3, 4, 5, 
+woot
+   
+ = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = 
+
+   Executing File:./py/test_funcmapper.py
+
+--- importing... ---
+      ExtModule::start_up()
+   ExtModule()
+   OldStyle::one_time_setup()
+   NEWTypeObject: 15old_style_class@0x102817330
+   NewStyle::one_time_setup()
+   NEWTypeObject: 15new_style_class@0x102817880
+   new_style_class::setup()
+       Importing method: func_exception
+       Importing method: func_keyword
+       Importing method: func_noargs
+       Importing method: func_varargs
+   ExtModule():0x1029802c8
+       Importing method: func
+       Importing method: old_style_class
+   meaning_of_life: 's42'
+{'__package__': None, 'meaning_of_life': 's42', '__spec__': None, 'func': <built-in method func of tuple object at 0x102978788>, '__doc__': 'doc for test_funcmapper', '__loader__': None, '__name__': 'test_funcmapper', 'old_style_class': <built-in method old_style_class of tuple object at 0x102978e48>}
+- - - - - - - 
+
+--- module func ---
+   
+   Old-Style Handler #2
+   Invoking: func
+      'func' invoked with Args:(), Keywords:{}
+   
+   Old-Style Handler #2
+   Invoking: func
+      'func' invoked with Args:(4, 5), Keywords:{}
+   
+   Old-Style Handler #2
+   Invoking: func
+      'func' invoked with Args:(4, 5), Keywords:{'value': 7, 'name': 6}
+
+--- old-style class function ---
+   
+   Old-Style Handler #1
+   Invoking: old_style_class
+      'factory_old_style_class' invoked with Args:()
+   OldStyle(): 0x100704a98
+---
+   
+   PyObject&:0x100704a98 SLOT:m_table->tp_getattr
+   Hit old-style::getattr override!
+   old-style: Got match!
+   
+   Old-Style Handler #0
+   Invoking: func_noargs
+      'f0_noargs' invoked with no Args or Keywords
+   
+   PyObject&:0x100704a98 SLOT:m_table->tp_getattr
+   Hit old-style::getattr override!
+   old-style: Got match!
+   
+   Old-Style Handler #1
+   Invoking: func_varargs
+      'f1_varargs' invoked with Args:()
+   
+   PyObject&:0x100704a98 SLOT:m_table->tp_getattr
+   Hit old-style::getattr override!
+   old-style: Got match!
+   
+   Old-Style Handler #1
+   Invoking: func_varargs
+      'f1_varargs' invoked with Args:(4,)
+   
+   PyObject&:0x100704a98 SLOT:m_table->tp_getattr
+   Hit old-style::getattr override!
+   old-style: Got match!
+   
+   Old-Style Handler #2
+   Invoking: func_keyword
+      'f2_keyword' invoked with Args:(), Keywords:{}
+   
+   PyObject&:0x100704a98 SLOT:m_table->tp_getattr
+   Hit old-style::getattr override!
+   old-style: Got match!
+   
+   Old-Style Handler #2
+   Invoking: func_keyword
+      'f2_keyword' invoked with Args:(), Keywords:{'value': 7, 'name': 6}
+   
+   PyObject&:0x100704a98 SLOT:m_table->tp_getattr
+   Hit old-style::getattr override!
+   old-style: Got match!
+   
+   Old-Style Handler #2
+   Invoking: func_keyword
+      'f2_keyword' invoked with Args:(4, 5), Keywords:{}
+   
+   PyObject&:0x100704a98 SLOT:m_table->tp_getattr
+   Hit old-style::getattr override!
+   old-style: Got match!
+   
+   Old-Style Handler #2
+   Invoking: func_keyword
+      'f2_keyword' invoked with Args:(4, 5), Keywords:{'value': 7, 'name': 6}
+
+--- new-style class function ---
+   NewStyle(): 0x10297fc30
+   NewStyle::NewStyle()
+      'new_style_class' invoked with Args:(), Keywords:{}
+   
+   PyObject&:0x10297fc30 SLOT:m_table->tp_getattro
+   
+   NewStyle handler #0
+      'f0_noargs' invoked with no Args or Keywords
+   value ref count 1
+   
+   PyObject&:0x10297fc30 SLOT:m_table->tp_getattro
+   
+   NewStyle handler #1
+      'f1_varargs' invoked with Args:()
+   
+   PyObject&:0x10297fc30 SLOT:m_table->tp_getattro
+   
+   NewStyle handler #1
+      'f1_varargs' invoked with Args:(4,)
+   
+   PyObject&:0x10297fc30 SLOT:m_table->tp_getattro
+   
+   NewStyle handler #2
+      'f2_keyword' invoked with Args:(), Keywords:{}
+   
+   PyObject&:0x10297fc30 SLOT:m_table->tp_getattro
+   
+   NewStyle handler #2
+      'f2_keyword' invoked with Args:(), Keywords:{'value': 7, 'name': 6}
+   
+   PyObject&:0x10297fc30 SLOT:m_table->tp_getattro
+   
+   NewStyle handler #2
+      'f2_keyword' invoked with Args:(4, 5), Keywords:{}
+   
+   PyObject&:0x10297fc30 SLOT:m_table->tp_getattro
+   
+   NewStyle handler #2
+      'f2_keyword' invoked with Args:(4, 5), Keywords:{'value': 7, 'name': 6}
+
+Testing error-catching...
+   
+   PyObject&:0x10297fc30 SLOT:m_table->tp_getattro
+   
+   NewStyle handler #0
+      'f0_exception' invoked with no Args or Keywords
+   CAUGHT exception in NEW-style-class call-handler
+   Throwing exception, reason{PiCxx Exception:f0_exception::RuntimeError!!!}, trace{Trace line:86, func:f0_exception, file:/Users/pi/Dev/PiCxx/test_PiCxx/test_funcmapper.cxx}
+   Python Error-Indicator wasn't set, setting...
+SUCCESS! Raised 'PiCxx Exception:f0_exception::RuntimeError!!!'
+
+--- Derived func ---
+   NewStyle(): 0x100383938
+   NewStyle::NewStyle()
+      'new_style_class' invoked with Args:(), Keywords:{}
+   
+   PyObject&:0x100383938 SLOT:m_table->tp_getattro
+   
+   PyObject&:0x100383938 SLOT:m_table->tp_getattro
+['__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__gt__', '__hash__', '__init__', '__le__', '__lt__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', 'derived_func', 'func_exception', 'func_keyword', 'func_noargs', 'func_varargs']
+   
+   PyObject&:0x100383938 SLOT:m_table->tp_getattro
+
+derived_func
+   
+   NewStyle handler #0
+      'f0_noargs' invoked with no Args or Keywords
+   value ref count 1
+   
+   PyObject&:0x100383938 SLOT:m_table->tp_getattro
+
+derived func_noargs
+   
+   PyObject&:0x100383938 SLOT:m_table->tp_getattro
+   
+   NewStyle handler #1
+      'f1_varargs' invoked with Args:()
+   
+   PyObject&:0x100383938 SLOT:m_table->tp_getattro
+   
+   NewStyle handler #1
+      'f1_varargs' invoked with Args:(4,)
+   
+   PyObject&:0x100383938 SLOT:m_table->tp_getattro
+   
+   NewStyle handler #2
+      'f2_keyword' invoked with Args:(), Keywords:{}
+   
+   PyObject&:0x100383938 SLOT:m_table->tp_getattro
+   
+   NewStyle handler #2
+      'f2_keyword' invoked with Args:(), Keywords:{'value': 7, 'name': 6}
+   
+   PyObject&:0x100383938 SLOT:m_table->tp_getattro
+   
+   NewStyle handler #2
+      'f2_keyword' invoked with Args:(4, 5), Keywords:{}
+   
+   PyObject&:0x100383938 SLOT:m_table->tp_getattro
+   
+   NewStyle handler #2
+      'f2_keyword' invoked with Args:(4, 5), Keywords:{'value': 7, 'name': 6}
+   
+   PyObject&:0x100383938 SLOT:m_table->tp_getattro
+default value
+   
+   PyObject&:0x100383938 SLOT:m_table->tp_setattro
+   
+   PyObject&:0x100383938 SLOT:m_table->tp_getattro
+a string
+   
+   PyObject&:0x100383938 SLOT:m_table->tp_setattro
+   
+   PyObject&:0x100383938 SLOT:m_table->tp_setattro
+0

@@ -1,0 +1,34 @@
+todo 14 jan '18
+
+    * tidy up documentation with walk-throughs
+    * more comprehensive test suite that makes it easier to see whether it passes
+    * test on Windows somehow
+    * maybe test with custom debug build for reference counting?
+    * put up on GitHub
+
+    * get down to one single mechanism for calling funcs
+
+
+
+Stack overflow questions that I can't place anywhere in the code sensibly
+(presented chronologically, some provided only for historical reasons):
+
+    http://stackoverflow.com/questions/25568417/how-to-embed-python-in-a-multi-platform-c-framework-juce
+    ^ !!! ToDo: update this once I have opensourced πcxx
+
+    http://stackoverflow.com/questions/26325176/load-module-into-embedded-python-runtime-using-pycxx
+
+    http://stackoverflow.com/questions/26963937/rtti-support-for-c11-cpprtti-and-gnug
+
+    http://stackoverflow.com/questions/27093008/ambiguous-resolution-error-from-selective-constructor-inheritance
+    ^ from the early days of the rewrite
+
+    http://stackoverflow.com/questions/27139089/delay-load-in-windows
+    ^ I removed all of this code
+
+    http://stackoverflow.com/questions/27223119/querying-python-runtime-for-all-objects-in-existence
+    ^ no answer as of yet
+
+    http://stackoverflow.com/questions/27399340/in-python-why-doesnt-y-x-y-1-also-increment-x
+
+
