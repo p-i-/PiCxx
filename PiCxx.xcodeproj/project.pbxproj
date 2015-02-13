@@ -30,7 +30,6 @@
 
 /* Begin PBXFileReference section */
 		0E9A25441A8E818500C74356 /* PiCxx */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = PiCxx; sourceTree = BUILT_PRODUCTS_DIR; };
-		0E9A254E1A8E81CB00C74356 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		0E9A25511A8E81CC00C74356 /* Config.hxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Config.hxx; sourceTree = "<group>"; };
 		0E9A25521A8E81CC00C74356 /* Debug.hxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Debug.hxx; sourceTree = "<group>"; };
 		0E9A25531A8E81CC00C74356 /* Exception.hxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Exception.hxx; sourceTree = "<group>"; };
@@ -46,7 +45,6 @@
 		0E9A255E1A8E81CC00C74356 /* ExtObj.hxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ExtObj.hxx; sourceTree = "<group>"; };
 		0E9A255F1A8E81CC00C74356 /* Objects.hxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Objects.hxx; sourceTree = "<group>"; };
 		0E9A25611A8E81CC00C74356 /* Exception.cxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Exception.cxx; sourceTree = "<group>"; };
-		0E9A25621A8E81CC00C74356 /* TODO.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TODO.txt; sourceTree = "<group>"; };
 		0E9A25661A8E825A00C74356 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		0E9A25671A8E825A00C74356 /* test_assert.hxx */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = test_assert.hxx; sourceTree = "<group>"; };
 		0E9A25681A8E825A00C74356 /* test_funcmapper.cxx */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = test_funcmapper.cxx; sourceTree = "<group>"; };
@@ -149,7 +147,9 @@
 		0E9A25CB1A8E827400C74356 /* unicodeobject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = unicodeobject.h; sourceTree = "<group>"; };
 		0E9A25CC1A8E827400C74356 /* warnings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = warnings.h; sourceTree = "<group>"; };
 		0E9A25CD1A8E827400C74356 /* weakrefobject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = weakrefobject.h; sourceTree = "<group>"; };
-		0E9A25D41A8E8AA400C74356 /* output.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = output.txt; sourceTree = "<group>"; };
+		0E9A25D51A8EC0F300C74356 /* output.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = output.txt; sourceTree = "<group>"; };
+		0E9A25D61A8EC0F300C74356 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		0E9A25D71A8EC0F300C74356 /* TODO.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = TODO.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,6 +166,9 @@
 		0E9A253B1A8E818500C74356 = {
 			isa = PBXGroup;
 			children = (
+				0E9A25D51A8EC0F300C74356 /* output.txt */,
+				0E9A25D61A8EC0F300C74356 /* README.md */,
+				0E9A25D71A8EC0F300C74356 /* TODO.txt */,
 				0E9A256C1A8E827400C74356 /* Libs */,
 				0E9A25461A8E818500C74356 /* PiCxx */,
 				0E9A25651A8E825A00C74356 /* test_PiCxx */,
@@ -184,9 +187,6 @@
 		0E9A25461A8E818500C74356 /* PiCxx */ = {
 			isa = PBXGroup;
 			children = (
-				0E9A254E1A8E81CB00C74356 /* README.md */,
-				0E9A25621A8E81CC00C74356 /* TODO.txt */,
-				0E9A25D41A8E8AA400C74356 /* output.txt */,
 				0E9A25601A8E81CC00C74356 /* Src */,
 				0E9A254F1A8E81CB00C74356 /* headers */,
 			);
