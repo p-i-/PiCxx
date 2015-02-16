@@ -219,23 +219,24 @@ At time of writing it's taken me close to 4 months, and I've had a tremendous am
 PyCxx...
 
    - appears to be ~20 years old.
-   - restricts itself to C++9x compliancy and appears to support obscure compilers
-   - seems to have fallen into defensive/passive maintenance
+   - restricts itself to C++9x compliancy and appears to support obscure/obsolete compilers
    - has huge amounts of duplication
-      - the whole library itself is split into two wings for Python 2.x and 3.x
-      - 50 or so separate trampoline functions (one for each of PyTypeObject's function-pointers)
+      - the whole library itself is split into two wings (for Python 2.x and 3.x)
+      - 50 or so separate trampoline functions (one for each of PyTypeObject's function-pointer slots)
       - 3 different mechanisms for trampolining method calls (old-style class, new style class, module)
       - pretty much every combination of operator overrides provided manually for PyObject wrapper class
    - ...
 
 It looks as though someone patched it up for Python3 and then (someone else?) bolted the new patched version together with the original version, using:
 
-    // foo.hxx
-    #ifdef Py2
-    #   include "py2/foo.hxx"
-    #else
-    #   include "py3/foo.hxx"
-    #endif
+```
+// foo.hxx
+#ifdef Py2
+#   include "py2/foo.hxx"
+#else
+#   include "py3/foo.hxx"
+#endif
+```
 
 πcxx
 
