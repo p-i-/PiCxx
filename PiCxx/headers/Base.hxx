@@ -4,21 +4,8 @@
 #ifndef PICXX_DEBUG
 #   define PICXX_DEBUG (1)
 #endif
-#include "Base/Debug.hxx"
-#include "Base/Config.hxx"
+#include "Base/Config.h"
+#include "Base/Debug.h"
 #include "Base/Exception.hxx"
+#include "Base/File.h"
 
-namespace Py
-{
-    inline void run_file( const char* filestring )
-    {
-        FILE* file = fopen(filestring,"r");
-        
-        COUT( "\n = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = \n" );
-        COUT( "Executing File:" << filestring );
-
-        COUT( PyRun_SimpleFile(file, filestring) );
-        
-        fclose( file );
-    }
-}

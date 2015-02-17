@@ -12,7 +12,7 @@
 		0E9A25CF1A8E866900C74356 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0E9A25661A8E825A00C74356 /* main.cpp */; };
 		0E9A25D01A8E866B00C74356 /* test_funcmapper.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 0E9A25681A8E825A00C74356 /* test_funcmapper.cxx */; };
 		0E9A25D21A8E867200C74356 /* test_objects.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 0E9A256A1A8E825A00C74356 /* test_objects.cxx */; };
-		0E9A25D31A8E867600C74356 /* test_prompt.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0E9A256B1A8E825A00C74356 /* test_prompt.cpp */; };
+		0E9A25D31A8E867600C74356 /* test_prompt.cxx in Sources */ = {isa = PBXBuildFile; fileRef = 0E9A256B1A8E825A00C74356 /* test_prompt.cxx */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -29,9 +29,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0E0F22C81A93694400B02299 /* File.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = File.h; sourceTree = "<group>"; };
 		0E9A25441A8E818500C74356 /* PiCxx */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = PiCxx; sourceTree = BUILT_PRODUCTS_DIR; };
-		0E9A25511A8E81CC00C74356 /* Config.hxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Config.hxx; sourceTree = "<group>"; };
-		0E9A25521A8E81CC00C74356 /* Debug.hxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Debug.hxx; sourceTree = "<group>"; };
+		0E9A25511A8E81CC00C74356 /* Config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Config.h; sourceTree = "<group>"; };
+		0E9A25521A8E81CC00C74356 /* Debug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Debug.h; sourceTree = "<group>"; };
 		0E9A25531A8E81CC00C74356 /* Exception.hxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Exception.hxx; sourceTree = "<group>"; };
 		0E9A25541A8E81CC00C74356 /* Base.hxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Base.hxx; sourceTree = "<group>"; };
 		0E9A25551A8E81CC00C74356 /* ExtModule.hxx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ExtModule.hxx; sourceTree = "<group>"; };
@@ -50,7 +51,7 @@
 		0E9A25681A8E825A00C74356 /* test_funcmapper.cxx */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = test_funcmapper.cxx; sourceTree = "<group>"; };
 		0E9A25691A8E825A00C74356 /* test_funcmapper.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = test_funcmapper.py; sourceTree = "<group>"; };
 		0E9A256A1A8E825A00C74356 /* test_objects.cxx */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = test_objects.cxx; sourceTree = "<group>"; };
-		0E9A256B1A8E825A00C74356 /* test_prompt.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = test_prompt.cpp; sourceTree = "<group>"; };
+		0E9A256B1A8E825A00C74356 /* test_prompt.cxx */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = test_prompt.cxx; sourceTree = "<group>"; };
 		0E9A256D1A8E827400C74356 /* libpython3.4.1_OSX.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libpython3.4.1_OSX.dylib; sourceTree = "<group>"; };
 		0E9A256F1A8E827400C74356 /* abstract.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = abstract.h; sourceTree = "<group>"; };
 		0E9A25701A8E827400C74356 /* accu.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = accu.h; sourceTree = "<group>"; };
@@ -209,9 +210,10 @@
 		0E9A25501A8E81CC00C74356 /* Base */ = {
 			isa = PBXGroup;
 			children = (
-				0E9A25511A8E81CC00C74356 /* Config.hxx */,
-				0E9A25521A8E81CC00C74356 /* Debug.hxx */,
+				0E9A25511A8E81CC00C74356 /* Config.h */,
+				0E9A25521A8E81CC00C74356 /* Debug.h */,
 				0E9A25531A8E81CC00C74356 /* Exception.hxx */,
+				0E0F22C81A93694400B02299 /* File.h */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -246,7 +248,7 @@
 				0E9A25681A8E825A00C74356 /* test_funcmapper.cxx */,
 				0E9A25691A8E825A00C74356 /* test_funcmapper.py */,
 				0E9A256A1A8E825A00C74356 /* test_objects.cxx */,
-				0E9A256B1A8E825A00C74356 /* test_prompt.cpp */,
+				0E9A256B1A8E825A00C74356 /* test_prompt.cxx */,
 			);
 			path = test_PiCxx;
 			sourceTree = "<group>";
@@ -418,7 +420,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0E9A25D31A8E867600C74356 /* test_prompt.cpp in Sources */,
+				0E9A25D31A8E867600C74356 /* test_prompt.cxx in Sources */,
 				0E9A25CF1A8E866900C74356 /* main.cpp in Sources */,
 				0E9A25D01A8E866B00C74356 /* test_funcmapper.cxx in Sources */,
 				0E9A25D21A8E867200C74356 /* test_objects.cxx in Sources */,

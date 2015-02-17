@@ -292,9 +292,10 @@ The remainder of this document is a mix of internal / external.  For the deep in
         headers
             Base.hxx
             Base
-                Config.hxx
-                Debug.hxx
+                Config.h
+                Debug.h
                 Exception.hxx
+                File.h
 
             Objects.hxx
             ExtObj.hxx
@@ -367,13 +368,14 @@ Other than that, the entire library is headers only. The good thing about that i
 
        headers
            Base.hxx
-           Base
-               Config.hxx
-               Debug.hxx
-               Exception.hxx
+            Base
+                Config.h
+                Debug.h
+                Exception.hxx
+                File.h
 
-Base.hxx includes all the headers in /Base in the order in which they are listed.
-(Used to be several until I did some pruning)
+Base.hxx includes all the headers in `/Base` in the order in which they are listed.
+(I use this pattern everywhere).
 
 - - -
 
@@ -381,8 +383,7 @@ Base.hxx includes all the headers in /Base in the order in which they are listed
 
 `Objects.hxx` includes `Base.hxx`
 
-If you just want to make use of stock Python objects, e.g. use a Python Dictionary object, just include Objects.hxx
-(but I can't imagine any practical use case like this).
+If you just want to make use of stock Python objects, e.g. use a Python Dictionary object, just include `Objects.hxx` (but I can't imagine any practical use case like this).
 
 The `test_objects.cxx` demo does exactly this. Maybe have a look at it before progressing...
 
@@ -398,23 +399,23 @@ The `test_objects.cxx` demo does exactly this. Maybe have a look at it before pr
                OldStyle.hxx
                NewStyle.hxx
 
-If you need extension objects, just include ExtObj.hxx.  That will include Objects.hxx and everything in /ExtObj in the correct order (as shown).
+If you need extension objects, just include ExtObj.hxx.  That will include `Objects.hxx` and everything in `/ExtObj` in the correct order (as shown).
 
 Be aware that Python has old style and new style classes.  New style came in with 2.2?  Everything is new style for 3.x  
 
 Why am I still supporting old-style then?  Well, maybe one day someone (maybe me) will extend this to support Python 2.x.  It doesn't seem to be dying...
 
-So both OldStyle and NewStyle derive from ExtObject, which itself derives from ExtObjBase.  I've added that extra layer just to explicitly separate out the parts of the base that require CRTP
+So both `OldStyle` and `NewStyle` derive from `ExtObject`, which itself derives from `ExtObjBase`.  I've added that extra layer just to explicitly separate out the parts of the base that require CRTP.
 
-If you look at ExtObjBase, you will see it has a ton of virtual methods -- each one corresponds to a slot on the function-pointer table of a PyTypeObject (look in TypeObject.hxx)
+If you look at `ExtObjBase`, you will see it has a ton of virtual methods -- each one corresponds to a slot on the function-pointer table of a `PyTypeObject` (look in `TypeObject.hxx`)
 
-For a custom extension object, every time Python runtime makes a new instance of it, in C++ land we must make an instance of a corresponding C++ class (deriving from OldStyle or NewStyle)
+For a custom extension object, every time Python runtime makes a new instance of it, in C++ land we must make an instance of a corresponding C++ class (deriving from `OldStyle` or `NewStyle`)
 
-When the Python runtime invokes some slot from this PyObject's PyTypeObject, (i.e. the slot contains a pointer to a function, so say Python runtime calls this function) this must result in a corresponding function getting invoked on this C++ object
+When the Python runtime invokes some slot from this `PyObject`s `PyTypeObject`, (i.e. the slot contains a pointer to a function, so say Python runtime calls this function) this must result in a corresponding function getting invoked on this C++ object.
 
-Bridge is the structure that binds the PyObject to the C++ object.  You will notice that Bridge is only used new style classes.  Old-style classes have PyObject as base-class, so the same memory location doubles as the PyObject and the bass class of the C++ object.
+`Bridge` is the structure that binds the `PyObject` to the C++ object.  You will notice that `Bridge` is only used new style classes.  Old-style classes have `PyObject` as base-class, so the same memory location doubles as the `PyObject` and the bass class of the C++ object.
 
- New style classes can't use this trick as the size of the PyObject isn't guaranteed, because for new style classes, we allow within Python derivation. And the derived class may have a bigger footprint.
+New style classes can't use this trick as the size of the `PyObject` isn't guaranteed, because for new style classes, we allow within-Python derivation. And the derived class may have a bigger footprint.
 
 ***TODO**: currently the new-style class still has a PyObject base which is unused. **Get rid of this!***
 
@@ -422,13 +423,14 @@ Bridge is the structure that binds the PyObject to the C++ object.  You will not
 
            ExtModule.hxx
 
-If you need an extension module, include only ExtModule.hxx, which will include ExtObj.hxx.  And I can't think of any situation where you wouldn't do this.  You stick your extension objects in an extension module. From Python you import the module and can then access the contained objects.
+If you need an extension module, include only `ExtModule.hxx`, which will include `ExtObj.hxx`.  And I can't think of any situation where you wouldn't do this.  You stick your extension objects in an extension module. From Python you import the module and can then access the contained objects.
 
-So what does FuncMapper do?  I'm documenting it here because it applies to both extension modules and extension classes.  It's possible to write functions for an extension module or an extension object.
+So what does `FuncMapper` do?  I'm documenting it here because it applies to both extension modules and extension classes.  It's possible to write functions for an extension module or an extension object.
 
 So the user, in Python, does something like `myModule.myFunc()` of `myObj.myFunc(arg,kw)` (etc), and Python will perform a lookup on `myFunc` and invoke its associated function pointer. πcxx needs to supply a function that will trampoline to a corresponding method in the module/object's C++ class.
 
-FuncMapper handles this trampolining.  
+`FuncMapper` handles this trampolining.
+
 The mechanism is slightly different for {old-style classes & modules} and {new-style classes}, but there is enough in common to warrant a single mechanism.
 
 - - -
@@ -444,16 +446,15 @@ The mechanism is slightly different for {old-style classes & modules} and {new-s
 
 Test suite!  At the moment this is not very comprehensive, but it should give some idea how to use πcxx.  It's probably best to start here when browsing through the source code.
 
-test_assert.hxx is a helper (currently unused)
+`test_assert.hxx` is a helper (currently unused)
 
-main.cpp allows you to toggle which of the tests you wish to run
+`main.cpp` allows you to toggle which of the tests you wish to run
 
-test_objects.cxx -- it's important to understand this one, because everything else makes use of this Object class.
+`test_objects.cxx` -- it's important to understand this one, because everything else makes use of this Object class.
 
-test_funcmapper.* tests extension module and classes (old&new style).
-Initialisation, trampolining of function calls, destruction.
+`test_funcmapper.*` tests extension module and classes (old&new style).  Initialisation, trampolining of function calls, destruction.
 
-test_prompt.cpp creates a interactive Python terminal prompt in XCode's console output Sometimes it's helpful to spawn this prompt in the middle of some other test.  This way we can inspect the state of the Python Runtime.
+`test_prompt.cpp` creates a interactive Python terminal prompt in XCode's console output Sometimes it's helpful to spawn this prompt in the middle of some other test.  This way we can inspect the state of the Python Runtime.
 
 
 ## Walkthroughs:
@@ -505,10 +506,9 @@ Special thanks to the wonderful people on Freenode, especially Yhg1s on #python 
 
 
 ## Final notes:
-In a few places I've demonstrated some C++ constructs using geordi
-Google "Geordi Eelis".  You can use Geordi for testing out C++ constructs on the FreeNode IRC server, #geordi
+In a few places I've demonstrated some C++ constructs using geordi.  Google *"Geordi Eelis"*.  You can use Geordi for testing out C++ constructs on the FreeNode IRC server, #geordi
 
-I recommend looking in `test_prompt.cpp` first, then looking in main, then looking at `test_funcmapper.*`.  Setting breakpoints and single-stepping through the code should reveal how the library works.
+I recommend looking in `test_prompt.cpp` first, then `main.cpp`, then `test_objects.hxx`, then `test_funcmapper.*`.  Setting breakpoints and single-stepping through the code should reveal how the library works.
 
 However, it's very difficult for me (now that I understand the problem) to provide good documentation.  Because reading and writing documentation is a linear process, And something like this is a connected web of moving parts.  So it's a challenge to present everything in some sensible order that builds up from the ground without any holes.  I'm hoping that in the future, other people seeking to understand the library will shine some light through these holes so that they can be patched up.
 
