@@ -1,7 +1,8 @@
 # πCxx
 Version 0.0  
 by π (pi@pipad.org)  
-20 Jan 2015
+20 Jan 2015  
+[https://github.com/p-i-/PiCxx]()  
 
 
 ## What is πcxx?
@@ -71,7 +72,7 @@ There are two scenarios where you might want to use it:
      You want your C++ app to run a Python VM,  
      *e.g. you want to script your gamelogic in Python*
 
-     ```c++ game
+     ```c++
      // C++ Game
      void gamelogic_loader() {
          // Crank up Python runtime
