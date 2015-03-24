@@ -612,7 +612,7 @@ namespace Py
         template< typename T, typename U>
         using subfail_if_neither_is_object_t = subfail_unless_t< is_object<T>() || is_object<U>() >;
 
-        using OpFunc = typeof(PyNumber_Add);
+        using OpFunc = decltype(PyNumber_Add);
         static Object do_op( OpFunc& op_func, const Object& t, const Object& u ) {
             PyObject* ret{ op_func( t.p, u.p ) };
 
