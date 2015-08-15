@@ -12,6 +12,8 @@
 #include <iterator>
 #include <utility>
 #include <typeinfo>
+#include <limits>
+#include <stddef.h>
 
 #include <complex>
 
@@ -554,9 +556,12 @@ namespace Py
                 Object dict{ PyDict_New() };
 
                 int i=0;
-                while( i < N )
-                    PyDict_SetItem( dict.p, list[i++].p, list[i++].p ); // PyDict_SetItem INCREFs k&v
+                while( i < N ) {
+                    auto k = list[i++].p;
+                    auto v = list[i++].p;
+                    PyDict_SetItem( dict.p, k, v ); // PyDict_SetItem INCREFs k&v
                     //PyObject_SetItem( dict.p, list[i++].p, list[i++].p );
+                }
 
                 *this = dict;
             }
