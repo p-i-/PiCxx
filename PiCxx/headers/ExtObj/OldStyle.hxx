@@ -98,10 +98,10 @@ namespace Py
         virtual Object getattr_methods( const std::string& name )
         {
             // see if name exists and get entry with method
-            auto& i = * method_map().find(name);
+            auto i = method_map().find(name);
 
             // // name doesn't exist in our method map...
-            if( i == *method_map().end() ) {
+            if( i == method_map().end() ) {
                 COUT( "old-style: No match!" );
                 if( name == "__methods__" ) {
                     // return List of all methods in map
@@ -117,7 +117,7 @@ namespace Py
             // ok, so name WAS found in the method map.
             // return to python a callable object that will invoke this method on this particular instance
             COUT( "old-style: Got match!" );
-            return i.second -> ConstructPyFunc(this);
+            return i -> second -> ConstructPyFunc(this);
         }
 
     private:

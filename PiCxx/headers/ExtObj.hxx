@@ -4,8 +4,8 @@
 #include "Objects.hxx" // ExtObj_* makes use of String Tuple etc
 
 
-#include "ExtObjBase.hxx"
-#include "Bridge.hxx"
+#include "ExtObj/ExtObjBase.hxx"
+#include "ExtObj/Bridge.hxx"
 
 #include "ExtObj/FuncMapper.hxx"
 
