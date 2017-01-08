@@ -191,13 +191,7 @@ IRC: Server:FreeNode, Channel:#pi
 = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
 ## License:
-
-   - Non-commercial  
      You are free to do whatever you like.
-
-   - Commercial  
-     You have to donate something you consider appropriate.  Cash.  Kittens.  A punch in the face.  Up to you -- surprise me!  At least donate an email saying hello.  (paypal would be a nice surprise: sunfish7@gmail.com)
-
 π  
 11 Feb 2015
 
