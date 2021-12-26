@@ -151,6 +151,11 @@ I've never come across this design pattern before. The original Proxy pattern th
 ### Other similar libraries
 I'm aware of two other open-source libraries that do the same thing: PyCxx and Boost::Python.
 
+#### EDIT (2021-12-26):
+More notable implementations:
+- https://github.com/pybind/pybind11 <-- modern reduction of Boost::python (I haven't explored it)
+- https://github.com/Lnk2past/copperhead <-- good for inline-compiling of C++ blocks in Python code (e.g. Python Notebook)
+
 πcxx is a complete rewrite of [PyCxx](http://sourceforge.net/projects/cxx/). 
 Motivation is given [below](#Motivation).  You could also maybe think of it as Boost::Python without requiring Boost, although I haven't explored Boost::Python, so I can't say how similar they are.
 
